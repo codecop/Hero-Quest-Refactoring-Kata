@@ -35,8 +35,8 @@ void playerFallsDown(int* playerHealth, int* playerStrength, struct Player* play
 {
     printf("Player drops off a cliff.\n");
 
-    if (*playerStrength < 5) {
-        *playerHealth -= 10;
+    if (player->playerStrength < 5) {
+        player->playerHealth -= 10;
         printf("Player's strength is too small. Health decreases by 10.\n");
     }
 }

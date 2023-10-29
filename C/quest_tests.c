@@ -49,11 +49,11 @@ static void test_playerFallsDown(void** state)
     (void)state;
 
     testPlayerStrength = 3;
-    testPlayer.playerHealth = 3;
+    testPlayer.playerStrength = 3;
     playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayer);
 
-    assert_int_equal(testPlayerHealth, 90);
-    // TODO assert_int_equal(testPlayer.playerHealth, 90);
+    // old assert_int_equal(testPlayerHealth, 90);
+    assert_int_equal(testPlayer.playerHealth, 90);
     testPlayerStrength = 20; // reset
     testPlayerHealth = 100;  // reset
     testPlayer.playerStrength = 20; // reset
@@ -67,6 +67,7 @@ static void test_playerFallsDownNoDamage(void** state)
     playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayer);
 
     assert_int_equal(testPlayerHealth, 100);
+    assert_int_equal(testPlayer.playerHealth, 100);
 }
 
 static void test_itemToString(void** state)
