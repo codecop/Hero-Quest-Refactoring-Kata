@@ -77,16 +77,16 @@ void itemApplyEffectToPlayer(const char* itemName,
                              int* playerStrength,
                              int* playerMagic, struct Item item, struct Player* player)
 {
-    printf("Applying the effect of %s (%s):\n", itemName, itemKind);
+    printf("Applying the effect of %s (%s):\n", item.itemName, item.itemKind);
 
-    if (strcmp(itemKind, "Health") == 0) {
-        *playerHealth += itemPower;
+    if (strcmp(item.itemKind, "Health") == 0) {
+        player->playerHealth += item.itemPower;
     }
-    else if (strcmp(itemKind, "Strength") == 0) {
-        *playerStrength += itemPower;
+    else if (strcmp(item.itemKind, "Strength") == 0) {
+        player->playerStrength += item.itemPower;
     }
-    else if (strcmp(itemKind, "Magic") == 0) {
-        *playerMagic += itemPower;
+    else if (strcmp(item.itemKind, "Magic") == 0) {
+        player->playerMagic += item.itemPower;
     }
     else {
         // ignore unknown item kind

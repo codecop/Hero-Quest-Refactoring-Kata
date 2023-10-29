@@ -112,7 +112,7 @@ static void test_itemReduceByUsageToJunk(void** state)
     assert_int_equal(testItem.itemPower, 0);
     assert_string_equal(testItem.itemKind, "Junk");
     testItem.itemPower = 10; // reset
-    testItem.itemName = "Strength";
+    testItem.itemKind = "Strength";
 }
 
 static void test_itemApplyEffectToPlayer(void** state)
@@ -122,9 +122,9 @@ static void test_itemApplyEffectToPlayer(void** state)
     itemApplyEffectToPlayer(testItemName, testItemKind, testItemPower,
                             &testPlayerHealth, &testPlayerStrength, &testPlayerMagic, testItem, &testPlayer);
 
-    assert_int_equal(testPlayerStrength, 30);
+    // old assert_int_equal(testPlayerStrength, 30);
     testPlayerStrength = 20; // reset
-    // TODO assert_int_equal(testPlayer.playerStrength, 30);
+    assert_int_equal(testPlayer.playerStrength, 30);
     testPlayer.playerStrength = 20; // reset
 }
 
@@ -132,11 +132,14 @@ static void test_itemApplyEffectToPlayerJunk(void** state)
 {
     (void)state;
 
+    char itemKind[10] = "Junk";
+    testItem.itemKind = itemKind;
     itemApplyEffectToPlayer(testItemName, "Junk", testItemPower, &testPlayerHealth,
                             &testPlayerStrength, &testPlayerMagic, testItem, &testPlayer);
 
-    assert_int_equal(testPlayerStrength, 20);
-    // TODO assert_int_equal(testPlayer.playerStrength, 20);
+    // old assert_int_equal(testPlayerStrength, 20);
+    assert_int_equal(testPlayer.playerStrength, 20);
+    testItem.itemKind = "Strength";
 }
 
 static void test_itemRepair(void** state)
