@@ -10,6 +10,14 @@ int playerStrength = 20;
 int playerMagic = 10;
 int playerCraftingSkill = 10;
 
+struct Player player = {
+    .playerName = "Conan",
+    .playerHealth = 100,
+    .playerStrength = 20,
+    .playerMagic = 10,
+    .playerCraftingSkill = 10
+};
+
 void playerToString(char* result, //
                     const char* playerName,
                     int playerHealth,
@@ -36,6 +44,12 @@ void playerFallsDown(int* playerHealth, int* playerStrength)
 char* amuletItemName = "Amulet of Strength";
 char* amuletItemKind = "Strength";
 int amuletItemPower = 10;
+
+struct Item amulet = {
+    .amuletItemName = "Amulet of Strength",
+    .amuletItemKind = "Strength",
+    .amuletItemPower = 10
+};
 
 void itemToString(char* result, //
                   const char* itemName,

@@ -12,7 +12,7 @@ struct Player {
     int playerMagic;
     int playerCraftingSkill;
 };
-// extern struct Player player;
+extern struct Player player;
 
 extern char* amuletItemName;
 extern char* amuletItemKind;
@@ -23,7 +23,7 @@ struct Item {
     char* amuletItemKind;
     int amuletItemPower;
 };
-// extern struct Item item;
+extern struct Item amulet;
 
 void playerToString(char* result, //
                     const char* playerName,
