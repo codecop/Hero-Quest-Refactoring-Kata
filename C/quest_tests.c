@@ -36,8 +36,8 @@ static void test_playerToString(void** state)
 static void test_playerFallsDown(void** state)
 {
     (void)state;
-
     testPlayer.playerStrength = 3;
+
     playerFallsDown(&testPlayer);
 
     assert_int_equal(testPlayer.playerHealth, 90);
@@ -81,8 +81,8 @@ static void test_itemReduceByUsageToJunk(void** state)
 {
     (void)state;
 
-    char itemKind[10] = "Strength";
     testItem.itemPower = 1;
+    char itemKind[10] = "Strength";
     testItem.itemKind = itemKind;
     itemReduceByUsage(&testItem);
 

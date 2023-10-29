@@ -4,13 +4,11 @@
 
 #include "quest.h"
 
-struct Player player = {
-    .playerName = "Conan",
-    .playerHealth = 100,
-    .playerStrength = 20,
-    .playerMagic = 10,
-    .playerCraftingSkill = 10
-};
+struct Player player = {.playerName = "Conan",
+                        .playerHealth = 100,
+                        .playerStrength = 20,
+                        .playerMagic = 10,
+                        .playerCraftingSkill = 10};
 
 void playerToString(char* result, struct Player player)
 {
@@ -33,8 +31,7 @@ void playerFallsDown(struct Player* player)
 struct Item amulet = {
     .itemName = "Amulet of Strength",
     .itemKind = "Strength",
-    .itemPower = 10
-};
+    .itemPower = 10};
 
 void itemToString(char* result, struct Item item)
 {
