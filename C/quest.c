@@ -56,7 +56,7 @@ void itemToString(char* result, //
                   const char* itemKind,
                   int itemPower, struct Item item)
 {
-    sprintf(result, "Item: %s\nKind: %s\nPower: %d\n", itemName, itemKind, itemPower);
+    sprintf(result, "Item: %s\nKind: %s\nPower: %d\n", item.itemName, item.itemKind, item.itemPower);
 }
 
 void itemReduceByUsage(char* itemKind, int* itemPower, struct Item* item)
