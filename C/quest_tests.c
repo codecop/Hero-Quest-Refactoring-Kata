@@ -149,9 +149,9 @@ static void test_itemRepair(void** state)
     srand(5); // control the random value
     itemRepair(&testItemPower, testPlayerCraftingSkill, &testItem, testPlayer);
 
-    assert_int_equal(testItemPower, 26);
+    // old assert_int_equal(testItemPower, 26);
     testItemPower = 10; // reset
-    // TODO assert_int_equal(testItem.itemPower, 16);
+    assert_int_equal(testItem.itemPower, 26);
     testItem.itemPower = 10; // reset
 }
 

@@ -97,9 +97,9 @@ void itemRepair(int* itemPower, int playerCraftingSkill, struct Item* item, stru
 {
     printf("Using the repair skill to fix the item:\n");
 
-    int repairAmount = rand() % (playerCraftingSkill * 2) + 1;
+    int repairAmount = rand() % (player.playerCraftingSkill * 2) + 1;
 
-    *itemPower += repairAmount;
+    item->itemPower += repairAmount;
 
-    printf("Repaired the item by %d points. Item's Durability: %d\n", repairAmount, *itemPower);
+    printf("Repaired the item by %d points. Item's Durability: %d\n", repairAmount, item->itemPower);
 }
