@@ -61,12 +61,12 @@ void itemToString(char* result, //
 
 void itemReduceByUsage(char* itemKind, int* itemPower, struct Item* item)
 {
-    printf("Using the item with kind '%s' and power %d\n", itemKind, *itemPower);
+    printf("Using the item with kind '%s' and power %d\n", item->itemKind, item->itemPower);
 
-    *itemPower /= 2;
+    item->itemPower /= 2;
 
-    if (*itemPower == 0) {
-        strcpy(itemKind, "Junk");
+    if (item->itemPower == 0) {
+        strcpy(item->itemKind, "Junk");
     }
 }
 

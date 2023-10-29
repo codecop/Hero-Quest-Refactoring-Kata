@@ -88,11 +88,11 @@ static void test_itemReduceByUsage(void** state)
 
     itemReduceByUsage(testItemKind, &testItemPower, &testItem);
 
-    assert_int_equal(testItemPower, 5);
-    assert_string_equal(testItemKind, "Strength");
+    // old assert_int_equal(testItemPower, 5);
+    // old assert_string_equal(testItemKind, "Strength");
     testItemPower = 10; // reset
-    // TODO assert_int_equal(testItem.itemPower, 5);
-    // TODO assert_string_equal(testItem.itemKind, "Strength");
+    assert_int_equal(testItem.itemPower, 5);
+    assert_string_equal(testItem.itemKind, "Strength");
     testItem.itemPower = 10; // reset
 }
 
@@ -103,14 +103,14 @@ static void test_itemReduceByUsageToJunk(void** state)
     testItemPower = 1;
     char itemKind[10] = "Strength";
     testItem.itemPower = 1;
-    testItem.itemKind = "Strength";
+    testItem.itemKind = itemKind;
     itemReduceByUsage(itemKind, &testItemPower, &testItem);
 
-    assert_int_equal(testItemPower, 0);
-    assert_string_equal(itemKind, "Junk");
+    // old assert_int_equal(testItemPower, 0);
+    // old assert_string_equal(itemKind, "Junk");
     testItemPower = 10; // reset
-    // TODO assert_int_equal(testItem.itemPower, 0);
-    // TODO assert_string_equal(testItem.itemKind, "Junk");
+    assert_int_equal(testItem.itemPower, 0);
+    assert_string_equal(testItem.itemKind, "Junk");
     testItem.itemPower = 10; // reset
     testItem.itemName = "Strength";
 }
