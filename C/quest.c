@@ -28,7 +28,7 @@ void playerToString(char* result, //
     sprintf(result,
             "%s's Attributes:\nHealth: %d\nStrength: %d\nMagic: %d\nCrafting "
             "Skill: %d\n",
-            playerName, playerHealth, playerStrength, playerMagic, playerCraftingSkill);
+            player.playerName, player.playerHealth, player.playerStrength, player.playerMagic, player.playerCraftingSkill);
 }
 
 void playerFallsDown(int* playerHealth, int* playerStrength, struct Player* player)
