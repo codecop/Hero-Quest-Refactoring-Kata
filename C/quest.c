@@ -18,12 +18,7 @@ struct Player player = {
     .playerCraftingSkill = 10
 };
 
-void playerToString(char* result, //
-                    const char* playerName,
-                    int playerHealth,
-                    int playerStrength,
-                    int playerMagic,
-                    int playerCraftingSkill, struct Player player)
+void playerToString(char* result, struct Player player)
 {
     sprintf(result,
             "%s's Attributes:\nHealth: %d\nStrength: %d\nMagic: %d\nCrafting "
@@ -31,7 +26,7 @@ void playerToString(char* result, //
             player.playerName, player.playerHealth, player.playerStrength, player.playerMagic, player.playerCraftingSkill);
 }
 
-void playerFallsDown(int* playerHealth, int* playerStrength, struct Player* player)
+void playerFallsDown(struct Player* player)
 {
     printf("Player drops off a cliff.\n");
 
@@ -51,15 +46,12 @@ struct Item amulet = {
     .itemPower = 10
 };
 
-void itemToString(char* result, //
-                  const char* itemName,
-                  const char* itemKind,
-                  int itemPower, struct Item item)
+void itemToString(char* result, struct Item item)
 {
     sprintf(result, "Item: %s\nKind: %s\nPower: %d\n", item.itemName, item.itemKind, item.itemPower);
 }
 
-void itemReduceByUsage(char* itemKind, int* itemPower, struct Item* item)
+void itemReduceByUsage(struct Item* item)
 {
     printf("Using the item with kind '%s' and power %d\n", item->itemKind, item->itemPower);
 
@@ -70,12 +62,7 @@ void itemReduceByUsage(char* itemKind, int* itemPower, struct Item* item)
     }
 }
 
-void itemApplyEffectToPlayer(const char* itemName,
-                             const char* itemKind,
-                             int itemPower,
-                             int* playerHealth,
-                             int* playerStrength,
-                             int* playerMagic, struct Item item, struct Player* player)
+void itemApplyEffectToPlayer(struct Item item, struct Player* player)
 {
     printf("Applying the effect of %s (%s):\n", item.itemName, item.itemKind);
 
@@ -93,7 +80,7 @@ void itemApplyEffectToPlayer(const char* itemName,
     }
 }
 
-void itemRepair(int* itemPower, int playerCraftingSkill, struct Item* item, struct Player player)
+void itemRepair(struct Item* item, struct Player player)
 {
     printf("Using the repair skill to fix the item:\n");
 
