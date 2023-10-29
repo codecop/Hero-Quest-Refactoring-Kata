@@ -53,6 +53,7 @@ static void test_playerFallsDown(void** state)
     playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayer);
 
     assert_int_equal(testPlayerHealth, 90);
+    // TODO assert_int_equal(testPlayer.playerHealth, 90);
     testPlayerStrength = 20; // reset
     testPlayerHealth = 100;  // reset
     testPlayer.playerStrength = 20; // reset
@@ -89,6 +90,9 @@ static void test_itemReduceByUsage(void** state)
     assert_int_equal(testItemPower, 5);
     assert_string_equal(testItemKind, "Strength");
     testItemPower = 10; // reset
+    // TODO assert_int_equal(testItem.itemPower, 5);
+    // TODO assert_string_equal(testItem.itemKind, "Strength");
+    testItem.itemPower = 10; // reset
 }
 
 static void test_itemReduceByUsageToJunk(void** state)
@@ -97,11 +101,17 @@ static void test_itemReduceByUsageToJunk(void** state)
 
     testItemPower = 1;
     char itemKind[10] = "Strength";
+    testItem.itemPower = 1;
+    testItem.itemKind = "Strength";
     itemReduceByUsage(itemKind, &testItemPower, &testItem);
 
     assert_int_equal(testItemPower, 0);
     assert_string_equal(itemKind, "Junk");
     testItemPower = 10; // reset
+    // TODO assert_int_equal(testItem.itemPower, 0);
+    // TODO assert_string_equal(testItem.itemKind, "Junk");
+    testItem.itemPower = 10; // reset
+    testItem.itemName = "Strength";
 }
 
 static void test_itemApplyEffectToPlayer(void** state)
@@ -113,6 +123,8 @@ static void test_itemApplyEffectToPlayer(void** state)
 
     assert_int_equal(testPlayerStrength, 30);
     testPlayerStrength = 20; // reset
+    // TODO assert_int_equal(testPlayer.playerStrength, 30);
+    testPlayer.playerStrength = 20; // reset
 }
 
 static void test_itemApplyEffectToPlayerJunk(void** state)
@@ -123,6 +135,7 @@ static void test_itemApplyEffectToPlayerJunk(void** state)
                             &testPlayerStrength, &testPlayerMagic, testItem, &testPlayer);
 
     assert_int_equal(testPlayerStrength, 20);
+    // TODO assert_int_equal(testPlayer.playerStrength, 20);
 }
 
 static void test_itemRepair(void** state)
@@ -134,6 +147,8 @@ static void test_itemRepair(void** state)
 
     assert_int_equal(testItemPower, 26);
     testItemPower = 10; // reset
+    // TODO assert_int_equal(testItem.itemPower, 16);
+    testItem.itemPower = 10; // reset
 }
 
 int main(void)
