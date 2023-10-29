@@ -36,7 +36,7 @@ static void test_playerToString(void** state)
 
     char result[256];
     playerToString(result, testPlayerName, testPlayerHealth, testPlayerStrength,
-                   testPlayerMagic, testPlayerCraftingSkill);
+                   testPlayerMagic, testPlayerCraftingSkill, testPlayer);
 
     const char* expected =
         "Conan's Attributes:\nHealth: 100\nStrength: 20\nMagic: 10\nCrafting "
@@ -49,7 +49,7 @@ static void test_playerFallsDown(void** state)
     (void)state;
 
     testPlayerStrength = 3;
-    playerFallsDown(&testPlayerHealth, &testPlayerStrength);
+    playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayer);
 
     assert_int_equal(testPlayerHealth, 90);
     testPlayerStrength = 20; // reset
@@ -60,7 +60,7 @@ static void test_playerFallsDownNoDamage(void** state)
 {
     (void)state;
 
-    playerFallsDown(&testPlayerHealth, &testPlayerStrength);
+    playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayer);
 
     assert_int_equal(testPlayerHealth, 100);
 }
@@ -70,7 +70,7 @@ static void test_itemToString(void** state)
     (void)state;
 
     char result[256];
-    itemToString(result, testItemName, testItemKind, testItemPower);
+    itemToString(result, testItemName, testItemKind, testItemPower, testItem);
 
     const char* expected =
         "Item: Amulet of Strength\nKind: Strength\nPower: 10\n";
@@ -81,7 +81,7 @@ static void test_itemReduceByUsage(void** state)
 {
     (void)state;
 
-    itemReduceByUsage(testItemKind, &testItemPower);
+    itemReduceByUsage(testItemKind, &testItemPower, &testItem);
 
     assert_int_equal(testItemPower, 5);
     assert_string_equal(testItemKind, "Strength");
@@ -94,7 +94,7 @@ static void test_itemReduceByUsageToJunk(void** state)
 
     testItemPower = 1;
     char itemKind[10] = "Strength";
-    itemReduceByUsage(itemKind, &testItemPower);
+    itemReduceByUsage(itemKind, &testItemPower, &testItem);
 
     assert_int_equal(testItemPower, 0);
     assert_string_equal(itemKind, "Junk");
@@ -106,7 +106,7 @@ static void test_itemApplyEffectToPlayer(void** state)
     (void)state;
 
     itemApplyEffectToPlayer(testItemName, testItemKind, testItemPower,
-                            &testPlayerHealth, &testPlayerStrength, &testPlayerMagic);
+                            &testPlayerHealth, &testPlayerStrength, &testPlayerMagic, testItem, &testPlayer);
 
     assert_int_equal(testPlayerStrength, 30);
     testPlayerStrength = 20; // reset
@@ -117,7 +117,7 @@ static void test_itemApplyEffectToPlayerJunk(void** state)
     (void)state;
 
     itemApplyEffectToPlayer(testItemName, "Junk", testItemPower, &testPlayerHealth,
-                            &testPlayerStrength, &testPlayerMagic);
+                            &testPlayerStrength, &testPlayerMagic, testItem, &testPlayer);
 
     assert_int_equal(testPlayerStrength, 20);
 }
@@ -127,7 +127,7 @@ static void test_itemRepair(void** state)
     (void)state;
 
     srand(5); // control the random value
-    itemRepair(&testItemPower, testPlayerCraftingSkill);
+    itemRepair(&testItemPower, testPlayerCraftingSkill, &testItem, testPlayer);
 
     assert_int_equal(testItemPower, 26);
     testItemPower = 10; // reset

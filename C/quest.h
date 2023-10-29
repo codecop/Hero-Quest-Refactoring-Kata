@@ -30,22 +30,23 @@ void playerToString(char* result, //
                     int playerHealth,
                     int playerStrength,
                     int playerMagic,
-                    int playerCraftingSkill);
+                    int playerCraftingSkill,
+                    struct Player player);
 
-void playerFallsDown(int* playerHealth, int* playerStrength);
+void playerFallsDown(int* playerHealth, int* playerStrength, struct Player* player);
 
 void itemToString(char* result, //
                   const char* itemName,
                   const char* itemKind,
-                  int itemPower);
+                  int itemPower, struct Item item);
 
-void itemReduceByUsage(char* itemKind, int* itemPower);
+void itemReduceByUsage(char* itemKind, int* itemPower, struct Item* item);
 
 void itemApplyEffectToPlayer(const char* itemName,
                              const char* itemKind,
                              int itemPower,
                              int* playerHealth,
                              int* playerStrength,
-                             int* playerMagic);
+                             int* playerMagic, struct Item item, struct Player* player);
 
-void itemRepair(int* itemPower, int playerCraftingSkill);
+void itemRepair(int* itemPower, int playerCraftingSkill, struct Item* item, struct Player player);
