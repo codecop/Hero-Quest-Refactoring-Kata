@@ -4,12 +4,6 @@
 
 #include "quest.h"
 
-char* playerName = "Conan";
-int playerHealth = 100;
-int playerStrength = 20;
-int playerMagic = 10;
-int playerCraftingSkill = 10;
-
 struct Player player = {
     .playerName = "Conan",
     .playerHealth = 100,
@@ -35,10 +29,6 @@ void playerFallsDown(struct Player* player)
         printf("Player's strength is too small. Health decreases by 10.\n");
     }
 }
-
-char* amuletItemName = "Amulet of Strength";
-char* amuletItemKind = "Strength";
-int amuletItemPower = 10;
 
 struct Item amulet = {
     .itemName = "Amulet of Strength",

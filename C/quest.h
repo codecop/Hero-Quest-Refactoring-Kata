@@ -1,10 +1,4 @@
 
-extern char* playerName;
-extern int playerHealth;
-extern int playerStrength;
-extern int playerMagic;
-extern int playerCraftingSkill;
-
 struct Player {
     char* playerName;
     int playerHealth;
@@ -13,10 +7,6 @@ struct Player {
     int playerCraftingSkill;
 };
 extern struct Player player;
-
-extern char* amuletItemName;
-extern char* amuletItemKind;
-extern int amuletItemPower;
 
 struct Item {
     char* itemName;
