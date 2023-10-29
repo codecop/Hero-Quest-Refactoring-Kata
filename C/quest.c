@@ -46,9 +46,9 @@ char* amuletItemKind = "Strength";
 int amuletItemPower = 10;
 
 struct Item amulet = {
-    .amuletItemName = "Amulet of Strength",
-    .amuletItemKind = "Strength",
-    .amuletItemPower = 10
+    .itemName = "Amulet of Strength",
+    .itemKind = "Strength",
+    .itemPower = 10
 };
 
 void itemToString(char* result, //

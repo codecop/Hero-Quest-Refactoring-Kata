@@ -25,9 +25,9 @@ char* testItemKind = "Strength";
 int testItemPower = 10;
 
 struct Item testItem = {
-    .amuletItemName = "Amulet of Strength",
-    .amuletItemKind = "Strength",
-    .amuletItemPower = 10
+    .itemName = "Amulet of Strength",
+    .itemKind = "Strength",
+    .itemPower = 10
 };
 
 static void test_playerToString(void** state)
@@ -49,11 +49,14 @@ static void test_playerFallsDown(void** state)
     (void)state;
 
     testPlayerStrength = 3;
+    testPlayer.playerHealth = 3;
     playerFallsDown(&testPlayerHealth, &testPlayerStrength, &testPlayer);
 
     assert_int_equal(testPlayerHealth, 90);
     testPlayerStrength = 20; // reset
     testPlayerHealth = 100;  // reset
+    testPlayer.playerStrength = 20; // reset
+    testPlayer.playerHealth = 100;  // reset
 }
 
 static void test_playerFallsDownNoDamage(void** state)

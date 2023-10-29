@@ -19,9 +19,9 @@ extern char* amuletItemKind;
 extern int amuletItemPower;
 
 struct Item {
-    char* amuletItemName;
-    char* amuletItemKind;
-    int amuletItemPower;
+    char* itemName;
+    char* itemKind;
+    int itemPower;
 };
 extern struct Item amulet;
 
