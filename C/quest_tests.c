@@ -12,9 +12,23 @@ int testPlayerStrength = 20;
 int testPlayerMagic = 10;
 int testPlayerCraftingSkill = 10;
 
+struct Player testPlayer = {
+    .playerName = "Conan",
+    .playerHealth = 100,
+    .playerStrength = 20,
+    .playerMagic = 10,
+    .playerCraftingSkill = 10
+};
+
 const char* testItemName = "Amulet of Strength";
 char* testItemKind = "Strength";
 int testItemPower = 10;
+
+struct Item testItem = {
+    .amuletItemName = "Amulet of Strength",
+    .amuletItemKind = "Strength",
+    .amuletItemPower = 10
+};
 
 static void test_playerToString(void** state)
 {
