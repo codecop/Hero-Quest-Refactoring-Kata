@@ -4,23 +4,26 @@
 
 #include "quest.h"
 
-const char* testPlayerName = "Conan";
-int testPlayerHealth = 100;
-int testPlayerStrength = 20;
-int testPlayerMagic = 10;
-int testPlayerCraftingSkill = 10;
+struct Player testPlayer = {
+    .playerName = "Conan",
+    .playerHealth = 100,
+    .playerStrength = 20,
+    .playerMagic = 10,
+    .playerCraftingSkill = 10
+};
 
-const char* testItemName = "Amulet of Strength";
-char* testItemKind = "Strength";
-int testItemPower = 10;
+struct Item testItem = {
+    .itemName = "Amulet of Strength",
+    .itemKind = "Strength",
+    .itemPower = 10
+};
 
 TEST_CASE("Quest")
 {
     SECTION("playerToString")
     {
         char result[256];
-        playerToString(result, testPlayerName, testPlayerHealth, testPlayerStrength,
-                       testPlayerMagic, testPlayerCraftingSkill);
+        playerToString(result, testPlayer);
 
         const char* expected =
             "Conan's Attributes:\nHealth: 100\nStrength: 20\nMagic: "
@@ -31,25 +34,26 @@ TEST_CASE("Quest")
 
     SECTION("playerFallsDown")
     {
-        testPlayerStrength = 3;
-        playerFallsDown(&testPlayerHealth, &testPlayerStrength);
+        testPlayer.playerStrength = 3;
 
-        REQUIRE(testPlayerHealth == 90);
-        testPlayerStrength = 20; // reset
-        testPlayerHealth = 100;  // reset
+        playerFallsDown(&testPlayer);
+
+        REQUIRE(testPlayer.playerHealth == 90);
+        testPlayer.playerStrength = 20; // reset
+        testPlayer.playerHealth = 100;  // reset
     }
 
     SECTION("playerFallsDownNoDamage")
     {
-        playerFallsDown(&testPlayerHealth, &testPlayerStrength);
+        playerFallsDown(&testPlayer);
 
-        REQUIRE(testPlayerHealth == 100);
+        REQUIRE(testPlayer.playerHealth == 100);
     }
 
     SECTION("itemToString")
     {
         char result[256];
-        itemToString(result, testItemName, testItemKind, testItemPower);
+        itemToString(result, testItem);
 
         const char* expected =
             "Item: Amulet of Strength\nKind: Strength\nPower: 10\n";
@@ -58,48 +62,51 @@ TEST_CASE("Quest")
 
     SECTION("itemReduceByUsage")
     {
-        itemReduceByUsage(testItemKind, &testItemPower);
+        itemReduceByUsage(&testItem);
 
-        REQUIRE(testItemPower == 5);
-        REQUIRE(*testItemKind == *"Strength");
-        testItemPower = 10; // reset
+        REQUIRE(testItem.itemPower == 5);
+        REQUIRE(*testItem.itemKind == *"Strength");
+        testItem.itemPower = 10; // reset
     }
 
     SECTION("itemReduceByUsageToJunk")
     {
-        testItemPower = 1;
+        testItem.itemPower = 1;
         char itemKind[10] = "Strength";
-        itemReduceByUsage(itemKind, &testItemPower);
+        testItem.itemKind = itemKind;
+        itemReduceByUsage(&testItem);
 
-        REQUIRE(testItemPower == 0);
-        REQUIRE(*itemKind == *"Junk");
-        testItemPower = 10; // reset
+        REQUIRE(testItem.itemPower == 0);
+        REQUIRE(*testItem.itemKind == *"Junk");
+        testItem.itemPower = 10; // reset
+        testItem.itemKind = "Strength";
     }
 
     SECTION("itemApplyEffectToPlayer")
     {
-        testItemPower = 10; // reset again, why?
-        itemApplyEffectToPlayer(testItemName, testItemKind, testItemPower, &testPlayerHealth,
-                                &testPlayerStrength, &testPlayerMagic);
+        testItem.itemPower = 10; // reset again, why?
+        itemApplyEffectToPlayer(testItem, &testPlayer);
 
-        REQUIRE(testPlayerStrength == 30);
-        testPlayerStrength = 20; // reset
+        REQUIRE(testPlayer.playerStrength == 30);
+        testPlayer.playerStrength = 20; // reset
     }
 
     SECTION("itemApplyEffectToPlayerJunk")
     {
-        itemApplyEffectToPlayer(testItemName, "Junk", testItemPower, &testPlayerHealth,
-                                &testPlayerStrength, &testPlayerMagic);
+        char itemKind[10] = "Junk";
+        testItem.itemKind = itemKind;
+        itemApplyEffectToPlayer(testItem, &testPlayer);
 
-        REQUIRE(testPlayerStrength == 20);
+        REQUIRE(testPlayer.playerStrength == 20);
+        testItem.itemKind = "Strength";
     }
 
     SECTION("itemRepair")
     {
         srand(5); // control the random value
-        itemRepair(&testItemPower, testPlayerCraftingSkill);
+        itemRepair(&testItem, testPlayer);
 
-        REQUIRE(testItemPower == 26);
-        testItemPower = 10; // reset
+        REQUIRE(testItem.itemPower == 26);
+        testItem.itemPower = 10; // reset
     }
 }

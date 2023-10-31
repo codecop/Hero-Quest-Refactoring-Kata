@@ -9,27 +9,24 @@ int main(void)
     srand(time(0));
 
     char result[256];
-    playerToString(result, playerName, playerHealth, playerStrength,
-                   playerMagic, playerCraftingSkill);
+    playerToString(result, player);
     printf("Player at begin\n%s\n", result);
 
-    itemToString(result, amuletItemName, amuletItemKind, amuletItemPower);
+    itemToString(result, amulet);
     printf("Player found an item\n%s\n", result);
 
-    itemApplyEffectToPlayer(amuletItemName, amuletItemKind, amuletItemPower,
-                            &playerHealth, &playerStrength, &playerMagic);
-    itemReduceByUsage(amuletItemKind, &amuletItemPower);
+    itemApplyEffectToPlayer(amulet, &player);
+    itemReduceByUsage(&amulet);
 
-    playerToString(result, playerName, playerHealth, playerStrength,
-                   playerMagic, playerCraftingSkill);
+    playerToString(result, player);
     printf("Player now\n%s\n", result);
 
-    itemToString(result, amuletItemName, amuletItemKind, amuletItemPower);
+    itemToString(result, amulet);
     printf("Item now\n%s\n", result);
 
     printf("Player tries to repair item...\n");
-    itemRepair(&amuletItemPower, playerCraftingSkill);
-    itemToString(result, amuletItemName, amuletItemKind, amuletItemPower);
+    itemRepair(&amulet, player);
+    itemToString(result, amulet);
     printf("Item now\n%s\n", result);
 
     return 0;

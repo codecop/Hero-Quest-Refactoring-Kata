@@ -4,88 +4,76 @@
 
 #include "quest.h"
 
-char* playerName = "Conan";
-int playerHealth = 100;
-int playerStrength = 20;
-int playerMagic = 10;
-int playerCraftingSkill = 10;
+struct Player player = {.playerName = "Conan",
+                        .playerHealth = 100,
+                        .playerStrength = 20,
+                        .playerMagic = 10,
+                        .playerCraftingSkill = 10};
 
-void playerToString(char* result, //
-                    const char* playerName,
-                    int playerHealth,
-                    int playerStrength,
-                    int playerMagic,
-                    int playerCraftingSkill)
+void playerToString(char* result, struct Player player)
 {
     sprintf(result,
             "%s's Attributes:\nHealth: %d\nStrength: %d\nMagic: %d\nCrafting "
             "Skill: %d\n",
-            playerName, playerHealth, playerStrength, playerMagic, playerCraftingSkill);
+            player.playerName, player.playerHealth, player.playerStrength, player.playerMagic, player.playerCraftingSkill);
 }
 
-void playerFallsDown(int* playerHealth, int* playerStrength)
+void playerFallsDown(struct Player* player)
 {
     printf("Player drops off a cliff.\n");
 
-    if (*playerStrength < 5) {
-        *playerHealth -= 10;
+    if (player->playerStrength < 5) {
+        player->playerHealth -= 10;
         printf("Player's strength is too small. Health decreases by 10.\n");
     }
 }
 
-char* amuletItemName = "Amulet of Strength";
-char* amuletItemKind = "Strength";
-int amuletItemPower = 10;
+struct Item amulet = {
+    .itemName = "Amulet of Strength",
+    .itemKind = "Strength",
+    .itemPower = 10};
 
-void itemToString(char* result, //
-                  const char* itemName,
-                  const char* itemKind,
-                  int itemPower)
+void itemToString(char* result, struct Item item)
 {
-    sprintf(result, "Item: %s\nKind: %s\nPower: %d\n", itemName, itemKind, itemPower);
+    sprintf(result, "Item: %s\nKind: %s\nPower: %d\n", item.itemName, item.itemKind, item.itemPower);
 }
 
-void itemReduceByUsage(char* itemKind, int* itemPower)
+void itemReduceByUsage(struct Item* item)
 {
-    printf("Using the item with kind '%s' and power %d\n", itemKind, *itemPower);
+    printf("Using the item with kind '%s' and power %d\n", item->itemKind, item->itemPower);
 
-    *itemPower /= 2;
+    item->itemPower /= 2;
 
-    if (*itemPower == 0) {
-        strcpy(itemKind, "Junk");
+    if (item->itemPower == 0) {
+        strcpy(item->itemKind, "Junk");
     }
 }
 
-void itemApplyEffectToPlayer(const char* itemName,
-                             const char* itemKind,
-                             int itemPower,
-                             int* playerHealth,
-                             int* playerStrength,
-                             int* playerMagic)
+void itemApplyEffectToPlayer(struct Item item, struct Player* player)
 {
-    printf("Applying the effect of %s (%s):\n", itemName, itemKind);
+    printf("Applying the effect of %s (%s):\n", item.itemName, item.itemKind);
 
-    if (strcmp(itemKind, "Health") == 0) {
-        *playerHealth += itemPower;
+    if (strcmp(item.itemKind, "Health") == 0) {
+        player->playerHealth += item.itemPower;
     }
-    else if (strcmp(itemKind, "Strength") == 0) {
-        *playerStrength += itemPower;
+    else if (strcmp(item.itemKind, "Strength") == 0) {
+        player->playerStrength += item.itemPower;
     }
-    else if (strcmp(itemKind, "Magic") == 0) {
-        *playerMagic += itemPower;
+    else if (strcmp(item.itemKind, "Magic") == 0) {
+        player->playerMagic += item.itemPower;
     }
     else {
         // ignore unknown item kind
     }
 }
 
-void itemRepair(int* itemPower, int playerCraftingSkill)
+void itemRepair(struct Item* item, struct Player player)
 {
     printf("Using the repair skill to fix the item:\n");
 
-    int repairAmount = rand() % (playerCraftingSkill * 2) + 1;
+    int repairAmount = rand() % (player.playerCraftingSkill * 2) + 1;
 
-    *itemPower += repairAmount;
+    item->itemPower += repairAmount;
 
-    printf("Repaired the item by %d points. Item's Durability: %d\n", repairAmount, *itemPower);
+    printf("Repaired the item by %d points. Item's Durability: %d\n", repairAmount, item->itemPower);
 }
