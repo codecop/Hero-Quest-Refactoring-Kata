@@ -4,7 +4,7 @@
 
 #include "quest.h"
 
-struct Player testPlayer = {
+Player testPlayer = {
     .playerName = "Conan",
     .playerHealth = 100,
     .playerStrength = 20,
@@ -12,7 +12,7 @@ struct Player testPlayer = {
     .playerCraftingSkill = 10
 };
 
-struct Item testItem = {
+Item testItem = {
     .itemName = "Amulet of Strength",
     .itemKind = "Strength",
     .itemPower = 10

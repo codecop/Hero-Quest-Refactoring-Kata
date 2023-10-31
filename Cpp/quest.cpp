@@ -4,13 +4,13 @@
 
 #include "quest.h"
 
-struct Player player = {.playerName = "Conan",
-                        .playerHealth = 100,
-                        .playerStrength = 20,
-                        .playerMagic = 10,
-                        .playerCraftingSkill = 10};
+Player player = {.playerName = "Conan",
+                 .playerHealth = 100,
+                 .playerStrength = 20,
+                 .playerMagic = 10,
+                 .playerCraftingSkill = 10};
 
-void playerToString(char* result, struct Player player)
+void playerToString(char* result, Player player)
 {
     sprintf(result,
             "%s's Attributes:\nHealth: %d\nStrength: %d\nMagic: %d\nCrafting "
@@ -18,7 +18,7 @@ void playerToString(char* result, struct Player player)
             player.playerName, player.playerHealth, player.playerStrength, player.playerMagic, player.playerCraftingSkill);
 }
 
-void playerFallsDown(struct Player* player)
+void playerFallsDown(Player* player)
 {
     printf("Player drops off a cliff.\n");
 
@@ -28,17 +28,17 @@ void playerFallsDown(struct Player* player)
     }
 }
 
-struct Item amulet = {
+Item amulet = {
     .itemName = "Amulet of Strength",
     .itemKind = "Strength",
     .itemPower = 10};
 
-void itemToString(char* result, struct Item item)
+void itemToString(char* result, Item item)
 {
     sprintf(result, "Item: %s\nKind: %s\nPower: %d\n", item.itemName, item.itemKind, item.itemPower);
 }
 
-void itemReduceByUsage(struct Item* item)
+void itemReduceByUsage(Item* item)
 {
     printf("Using the item with kind '%s' and power %d\n", item->itemKind, item->itemPower);
 
@@ -49,7 +49,7 @@ void itemReduceByUsage(struct Item* item)
     }
 }
 
-void itemApplyEffectToPlayer(struct Item item, struct Player* player)
+void itemApplyEffectToPlayer(Item item, Player* player)
 {
     printf("Applying the effect of %s (%s):\n", item.itemName, item.itemKind);
 
@@ -67,7 +67,7 @@ void itemApplyEffectToPlayer(struct Item item, struct Player* player)
     }
 }
 
-void itemRepair(struct Item* item, struct Player player)
+void itemRepair(Item* item, Player player)
 {
     printf("Using the repair skill to fix the item:\n");
 

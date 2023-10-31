@@ -1,28 +1,30 @@
 
-struct Player {
+class Player {
+    public:
     char* playerName;
     int playerHealth;
     int playerStrength;
     int playerMagic;
     int playerCraftingSkill;
 };
-extern struct Player player;
+extern Player player;
 
-struct Item {
+class Item {
+    public:
     char* itemName;
     char* itemKind;
     int itemPower;
 };
-extern struct Item amulet;
+extern Item amulet;
 
-void playerToString(char* result, struct Player player);
+void playerToString(char* result, Player player);
 
-void playerFallsDown(struct Player* player);
+void playerFallsDown(Player* player);
 
-void itemToString(char* result, struct Item item);
+void itemToString(char* result, Item item);
 
-void itemReduceByUsage(struct Item* item);
+void itemReduceByUsage(Item* item);
 
-void itemApplyEffectToPlayer(struct Item item, struct Player* player);
+void itemApplyEffectToPlayer(Item item, Player* player);
 
-void itemRepair(struct Item* item, struct Player player);
+void itemRepair(Item* item, Player player);
