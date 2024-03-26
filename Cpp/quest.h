@@ -1,3 +1,5 @@
+#ifndef HEROQUEST_H
+#define HEROQUEST_H
 
 extern char* playerName;
 extern int playerHealth;
@@ -33,3 +35,5 @@ void itemApplyEffectToPlayer(const char* itemName,
                              int* playerMagic);
 
 void itemRepair(int* itemPower, int playerCraftingSkill);
+
+#endif // HEROQUEST_H
