@@ -1,0 +1,27 @@
+name: Test Python_dataclass
+
+on:
+  push:
+    paths:
+      - 'Python_dataclass/**'
+      - '.github/workflows/Python_dataclass.yml'
+  pull_request:
+    paths:
+      - 'Python_dataclass/**'
+      - '.github/workflows/Python_dataclass.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12' 
+
+    - name: Test
+      working-directory: Python_dataclass
+      run: python hero_quest_tests.py 
