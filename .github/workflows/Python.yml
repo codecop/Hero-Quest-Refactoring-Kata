@@ -1,0 +1,27 @@
+name: Test Python
+
+on:
+  push:
+    paths:
+      - 'Python/**'
+      - '.github/workflows/Python.yml'
+  pull_request:
+    paths:
+      - 'Python/**'
+      - '.github/workflows/Python.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12' 
+
+    - name: Test
+      working-directory: Python
+      run: python hero_quest_tests.py 
