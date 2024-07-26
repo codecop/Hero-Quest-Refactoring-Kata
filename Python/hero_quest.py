@@ -36,13 +36,14 @@ class HeroQuest:
         elif quest_data["item_kind"] == "Magic":
             quest_data["player_magic"] += quest_data["item_power"]
         else:
-            pass  # Ignore unknown item kind
+            pass  # ignore unknown item kind
 
     @staticmethod
     def item_repair(quest_data: dict):
         print("Using the repair skill to fix the item:")
 
         repair_amount = -5 + ((quest_data["player_crafting_skill"] * 2) + 1)
+        
         quest_data["item_power"] += repair_amount
 
         print(f"Repaired the item by {repair_amount} points. Item's Durability: {quest_data['item_power']}")
