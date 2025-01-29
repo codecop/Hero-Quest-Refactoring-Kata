@@ -37,3 +37,7 @@ jobs:
     - name: Build and test
       working-directory: Java_mutable-parameters
       run: mvn -B package
+
+    - name: Run
+      working-directory: Java_mutable-parameters
+      run: mvn compile exec:java

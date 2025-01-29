@@ -29,4 +29,8 @@ jobs:
 
     - name: Test
       working-directory: Python
-      run: python hero_quest_tests.py 
+      run: python hero_quest_tests.py
+
+    - name: Run
+      working-directory: Python
+      run: python main.py

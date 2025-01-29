@@ -34,3 +34,7 @@ jobs:
     - name: Test
       working-directory: JavaScript
       run: npm test
+
+    - name: Run
+      working-directory: JavaScript
+      run: npm start
