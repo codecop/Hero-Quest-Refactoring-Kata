@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include <cstdlib>
 #include <catch2/catch.hpp>
+#include <string>
 
 #include "quest.h"
 
@@ -26,7 +27,9 @@ TEST_CASE("Quest")
             "Conan's Attributes:\nHealth: 100\nStrength: 20\nMagic: "
             "10\nCrafting "
             "Skill: 10\n";
-        REQUIRE(*result == *expected);
+        std::string expectedStr = expected;
+        std::string actualStr = result;
+        REQUIRE(expectedStr == actualStr);
     }
 
     SECTION("playerFallsDown")
@@ -53,7 +56,9 @@ TEST_CASE("Quest")
 
         const char* expected =
             "Item: Amulet of Strength\nKind: Strength\nPower: 10\n";
-        REQUIRE(*result == *expected);
+        std::string expectedStr = expected;
+        std::string actualStr = result;
+        REQUIRE(expectedStr == actualStr);
     }
 
     SECTION("itemReduceByUsage")
@@ -61,7 +66,9 @@ TEST_CASE("Quest")
         itemReduceByUsage(testItemKind, &testItemPower);
 
         REQUIRE(testItemPower == 5);
-        REQUIRE(*testItemKind == *"Strength");
+        std::string expectedStr = testItemKind;
+        std::string actualStr = "Strength";
+        REQUIRE(expectedStr == actualStr);
         testItemPower = 10; // reset
     }
 
@@ -72,7 +79,9 @@ TEST_CASE("Quest")
         itemReduceByUsage(itemKind, &testItemPower);
 
         REQUIRE(testItemPower == 0);
-        REQUIRE(*itemKind == *"Junk");
+        std::string expectedStr = itemKind;
+        std::string actualStr = "Junk";
+        REQUIRE(expectedStr == actualStr);
         testItemPower = 10; // reset
     }
 
