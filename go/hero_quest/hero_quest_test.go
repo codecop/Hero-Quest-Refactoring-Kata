@@ -7,92 +7,91 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPlayerToString(t *testing.T) {
-	questData := createQuestData()
+var (
+	testPlayerName          = "Conan"
+	testPlayerHealth        = 100
+	testPlayerStrength      = 20
+	testPlayerMagic         = 10
+	testPlayerCraftingSkill = 10
 
-	result := hero_quest.PlayerToString(questData.PlayerName, questData.PlayerHealth, questData.PlayerStrength, questData.PlayerMagic, questData.PlayerCraftingSkill)
+	testItemName  = "Amulet of Strength"
+	testItemKind  = "Strength"
+	testItemPower = 10
+)
+
+func TestPlayerToString(t *testing.T) {
+	result := hero_quest.PlayerToString(testPlayerName, testPlayerHealth, testPlayerStrength, testPlayerMagic, testPlayerCraftingSkill)
 
 	assert.Equal(t, "Conan's Attributes:\nHealth: 100\nStrength: 20\nMagic: 10\nCrafting Skill: 10\n", result)
 }
 
 func TestPlayerFallsDown(t *testing.T) {
-	questData := createQuestData()
-	questData.PlayerStrength = 3
+	testPlayerStrength = 3
+	defer func() {
+		testPlayerStrength = 20
+		testPlayerHealth = 100
+	}() // reset
 
-	hero_quest.PlayerFallsDown(&questData)
+	hero_quest.PlayerFallsDown(&testPlayerHealth, &testPlayerStrength)
 
-	assert.Equal(t, 90, questData.PlayerHealth)
+	assert.Equal(t, 90, testPlayerHealth)
 }
 
 func TestPlayerFallsDownNoDamage(t *testing.T) {
-	questData := createQuestData()
+	hero_quest.PlayerFallsDown(&testPlayerHealth, &testPlayerStrength)
 
-	hero_quest.PlayerFallsDown(&questData)
-
-	assert.Equal(t, 100, questData.PlayerHealth)
+	assert.Equal(t, 100, testPlayerHealth)
 }
 
 func TestItemToString(t *testing.T) {
-	questData := createQuestData()
-
-	result := hero_quest.ItemToString(questData.ItemName, questData.ItemKind, questData.ItemPower)
+	result := hero_quest.ItemToString(testItemName, testItemKind, testItemPower)
 
 	assert.Equal(t, "Item: Amulet of Strength\nKind: Strength\nPower: 10\n", result)
 }
 
 func TestItemReduceByUsage(t *testing.T) {
-	questData := createQuestData()
+	defer func() {
+		testItemPower = 10
+	}() // reset
+	hero_quest.ItemReduceByUsage(&testItemKind, &testItemPower)
 
-	hero_quest.ItemReduceByUsage(&questData)
-
-	assert.Equal(t, 5, questData.ItemPower)
+	assert.Equal(t, 5, testItemPower)
 }
 
 func TestItemReduceByUsageToJunk(t *testing.T) {
-	questData := createQuestData()
-	questData.ItemPower = 1
+	testItemPower = 1
+	defer func() {
+		testItemPower = 10
+		testItemKind = "Strength"
+	}() // reset
 
-	hero_quest.ItemReduceByUsage(&questData)
+	hero_quest.ItemReduceByUsage(&testItemKind, &testItemPower)
 
 	assert := assert.New(t)
-	assert.Equal(0, questData.ItemPower)
-	assert.Equal("Junk", questData.ItemKind)
+	assert.Equal(0, testItemPower)
+	assert.Equal("Junk", testItemKind)
 }
 
 func TestItemApplyEffectToPlayer(t *testing.T) {
-	questData := createQuestData()
+	defer func() {
+		testPlayerStrength = 20
+	}()
+	hero_quest.ItemApplyEffectToPlayer(testItemName, testItemKind, testItemPower, &testPlayerHealth, &testPlayerStrength, &testPlayerMagic)
 
-	hero_quest.ItemApplyEffectToPlayer(&questData)
-
-	assert.Equal(t, 30, questData.PlayerStrength)
+	assert.Equal(t, 30, testPlayerStrength)
 }
 
 func TestItemApplyEffectToPlayerJunk(t *testing.T) {
-	questData := createQuestData()
-	questData.ItemKind = "Junk"
+	hero_quest.ItemApplyEffectToPlayer(testItemName, "Junk", testItemPower, &testPlayerHealth, &testPlayerStrength, &testPlayerMagic)
 
-	hero_quest.ItemApplyEffectToPlayer(&questData)
-
-	assert.Equal(t, 20, questData.PlayerStrength)
+	assert.Equal(t, 20, testPlayerStrength)
 }
 
 func TestItemRepair(t *testing.T) {
-	questData := createQuestData()
+	defer func() {
+		testItemPower = 10
+	}()
+	hero_quest.ItemRepair(&testItemPower, testPlayerCraftingSkill)
 
-	hero_quest.ItemRepair(&questData)
-
-	assert.Equal(t, 26, questData.ItemPower)
-}
-
-func createQuestData() hero_quest.QuestData {
-	return hero_quest.QuestData{
-		PlayerName:          "Conan",
-		PlayerHealth:        100,
-		PlayerStrength:      20,
-		PlayerMagic:         10,
-		PlayerCraftingSkill: 10,
-		ItemName:            "Amulet of Strength",
-		ItemKind:            "Strength",
-		ItemPower:           10,
-	}
+	assert.Equal(t, 26, testItemPower)
 }
