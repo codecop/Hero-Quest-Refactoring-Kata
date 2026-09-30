@@ -2,11 +2,6 @@ package codingdojo;
 
 public class Main {
 
-    public static void main(String[] args) {
-        run();
-        System.out.println(HeroQuest.output);
-    }
-
     public static void run() {
         String playerName = "Conan";
         int[] playerHealth = new int[]{100};
@@ -78,5 +73,10 @@ public class Main {
 
         result = HeroQuest.enemyToString(enemyName, enemyPower[0]);
         HeroQuest.output.append(result).append("\n");
+    }
+
+    public static void main(String[] args) {
+        run();
+        System.out.println(HeroQuest.output);
     }
 }
