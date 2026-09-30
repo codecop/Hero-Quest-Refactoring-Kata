@@ -7,7 +7,7 @@ class HeroQuestTestCase(unittest.TestCase):
 
     def setUp(self):
         HeroQuest.output = []
-        self.quest_data = QuestData("Conan", 100, 20, 10, 10, "Amulet of Strength", "Strength", 10, "Goblin Warlord", 12)
+        self.quest_data = QuestData("Conan", 100, 20, 10, 10, "Amulet of Strength", "Strength", 10, "Goblin", 5)
 
     def test_player_to_string(self) -> None:
         result = HeroQuest.player_to_string(self.quest_data.player_name, self.quest_data.player_health,
@@ -65,16 +65,16 @@ class HeroQuestTestCase(unittest.TestCase):
 
     def test_enemy_to_string(self):
         result = HeroQuest.enemy_to_string(self.quest_data.enemy_name, self.quest_data.enemy_power)
-        expected = "Enemy: Goblin Warlord\nPower: 12\n"
+        expected = "Enemy: Goblin\nPower: 5\n"
         assert result == expected
 
     def test_enemy_attack_player(self):
         HeroQuest.enemy_attack_player(self.quest_data)
-        assert 94 == self.quest_data.player_health
+        assert 98 == self.quest_data.player_health
 
     def test_player_challenge_enemy(self):
         HeroQuest.player_challenge_enemy(self.quest_data)
-        assert 0 == self.quest_data.enemy_power
+        assert -7 == self.quest_data.enemy_power
 
 
 if __name__ == '__main__':

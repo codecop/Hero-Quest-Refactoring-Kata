@@ -121,8 +121,6 @@ class HeroQuestTestCase(unittest.TestCase):
         self.enemy_power = HeroQuest.player_challenge_enemy(
             self.enemy_name, self.player_strength, self.item_power, self.enemy_power
         )
-        # player_attack_power = 20 + 10/2 = 25
-        # enemy_power = 5 - 25/2 = 5 - 12 = -7
         assert -7 == self.enemy_power
 
 
