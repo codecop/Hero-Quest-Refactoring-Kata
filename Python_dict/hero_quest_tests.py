@@ -6,6 +6,7 @@ from hero_quest import HeroQuest
 class HeroQuestTestCase(unittest.TestCase):
 
     def setUp(self):
+        HeroQuest.output = []
         self.quest_data = {
             "player_name": "Conan",
             "player_health": 100,
@@ -14,13 +15,19 @@ class HeroQuestTestCase(unittest.TestCase):
             "player_crafting_skill": 10,
             "item_name": "Amulet of Strength",
             "item_kind": "Strength",
-            "item_power": 10
+            "item_power": 10,
+            "enemy_name": "Goblin Warlord",
+            "enemy_power": 12
         }
 
     def test_player_to_string(self) -> None:
-        result = HeroQuest.player_to_string(self.quest_data["player_name"], self.quest_data["player_health"],
-                                            self.quest_data["player_strength"], self.quest_data["player_magic"],
-                                            self.quest_data["player_crafting_skill"])
+        result = HeroQuest.player_to_string(
+            self.quest_data["player_name"],
+            self.quest_data["player_health"],
+            self.quest_data["player_strength"],
+            self.quest_data["player_magic"],
+            self.quest_data["player_crafting_skill"],
+        )
 
         expected = "Conan's Attributes:\nHealth: 100\nStrength: 20\nMagic: 10\nCrafting Skill: 10\n"
         assert result == expected
@@ -37,7 +44,9 @@ class HeroQuestTestCase(unittest.TestCase):
         assert 100 == self.quest_data["player_health"]
 
     def test_item_to_string(self):
-        result = HeroQuest.item_to_string(self.quest_data["item_name"], self.quest_data["item_kind"], self.quest_data["item_power"])
+        result = HeroQuest.item_to_string(
+            self.quest_data["item_name"], self.quest_data["item_kind"], self.quest_data["item_power"]
+        )
 
         expected = "Item: Amulet of Strength\nKind: Strength\nPower: 10\n"
         assert expected == result
@@ -70,6 +79,19 @@ class HeroQuestTestCase(unittest.TestCase):
         HeroQuest.item_repair(self.quest_data)
 
         assert 26 == self.quest_data["item_power"]
+
+    def test_enemy_to_string(self):
+        result = HeroQuest.enemy_to_string(self.quest_data["enemy_name"], self.quest_data["enemy_power"])
+        expected = "Enemy: Goblin Warlord\nPower: 12\n"
+        assert result == expected
+
+    def test_enemy_attack_player(self):
+        HeroQuest.enemy_attack_player(self.quest_data)
+        assert 94 == self.quest_data["player_health"]
+
+    def test_player_challenge_enemy(self):
+        HeroQuest.player_challenge_enemy(self.quest_data)
+        assert 0 == self.quest_data["enemy_power"]
 
 
 if __name__ == '__main__':
