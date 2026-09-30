@@ -106,6 +106,11 @@ class HeroQuestTestCase(unittest.TestCase):
 
         assert 26 == self.item_power
 
+    def test_enemy_to_string(self):
+        result = HeroQuest.enemy_to_string(self.enemy_name, self.enemy_power)
+        expected = "Enemy: Goblin\nPower: 5\n"
+        assert result == expected
+
     def test_enemy_attack_player(self):
         self.player_health = HeroQuest.enemy_attack_player(
             self.enemy_name, self.enemy_power, self.player_strength, self.player_health
