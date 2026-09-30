@@ -1,14 +1,14 @@
-name: Test Java_dataclass
+name: Test java_dataclass
 
 on:
   push:
     paths:
-      - 'Java_dataclass/**'
-      - '.github/workflows/Java_dataclass.yml'
+      - 'java_dataclass/**'
+      - '.github/workflows/java_dataclass.yml'
   pull_request:
     paths:
-      - 'Java_dataclass/**'
-      - '.github/workflows/Java_dataclass.yml'
+      - 'java_dataclass/**'
+      - '.github/workflows/java_dataclass.yml'
 
 jobs:
   build:
@@ -29,9 +29,9 @@ jobs:
         java-version: ${{ matrix.java-version }}
 
     - name: Build and test
-      working-directory: Java_dataclass
+      working-directory: java_dataclass
       run: mvn -B package
 
     - name: Run
-      working-directory: Java_dataclass
+      working-directory: java_dataclass
       run: mvn compile exec:java
