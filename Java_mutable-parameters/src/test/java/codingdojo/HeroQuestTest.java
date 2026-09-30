@@ -15,7 +15,6 @@ public class HeroQuestTest {
     private String itemName;
     private String[] itemKind;
     private int[] itemPower;
-
     private String enemyName;
     private int[] enemyPower;
 
