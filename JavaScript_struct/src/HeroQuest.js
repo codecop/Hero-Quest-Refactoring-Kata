@@ -1,14 +1,16 @@
+let output = [];
+
 class HeroQuest {
     static playerToString(playerName, playerHealth, playerStrength, playerMagic, playerCraftingSkill) {
         return `${playerName}'s Attributes:\nHealth: ${playerHealth}\nStrength: ${playerStrength}\nMagic: ${playerMagic}\nCrafting Skill: ${playerCraftingSkill}\n`;
     }
 
     static playerFallsDown(questData) {
-        console.log("Player drops off a cliff.");
+        output.push("Player drops off a cliff.\n");
 
         if (questData.playerStrength < 5) {
             questData.playerHealth -= 10;
-            console.log("Player's strength is too small. Health decreases by 10.");
+            output.push("Player's strength is too small. Health decreases by 10.\n");
         }
     }
 
@@ -17,7 +19,7 @@ class HeroQuest {
     }
 
     static itemReduceByUsage(questData) {
-        console.log(`Using the item with kind '${questData.itemKind}' and power ${questData.itemPower}`);
+        output.push(`Using the item with kind '${questData.itemKind}' and power ${questData.itemPower}\n`);
 
         questData.itemPower = Math.floor(questData.itemPower / 2);
 
@@ -27,7 +29,7 @@ class HeroQuest {
     }
 
     static itemApplyEffectToPlayer(questData) {
-        console.log(`Applying the effect of ${questData.itemName} (${questData.itemKind}):`);
+        output.push(`Applying the effect of ${questData.itemName} (${questData.itemKind}):\n`);
 
         if (questData.itemKind === "Health") {
             questData.playerHealth += questData.itemPower;
@@ -37,21 +39,50 @@ class HeroQuest {
             questData.playerMagic += questData.itemPower;
         } else {
             // ignore unknown item kind
-
         }
     }
 
     static itemRepair(questData) {
-        console.log("Using the repair skill to fix the item:");
+        output.push("Using the repair skill to fix the item:\n");
 
         let repairAmount = -5 + ((questData.playerCraftingSkill * 2) + 1);
 
         questData.itemPower += repairAmount;
 
-        console.log(`Repaired the item by ${repairAmount} points. Item's Durability: ${questData.itemPower}`);
+        output.push(`Repaired the item by ${repairAmount} points. Item's Durability: ${questData.itemPower}\n`);
+    }
+
+    static enemyToString(enemyName, enemyPower) {
+        return `Enemy: ${enemyName}\nPower: ${enemyPower}\n`;
+    }
+
+    static enemyAttackPlayer(questData) {
+        output.push(`The enemy '${questData.enemyName}' attacks!\n`);
+        let damage = questData.enemyPower;
+
+        if (questData.playerStrength > questData.enemyPower) {
+            damage = Math.floor(damage / 2);
+            output.push("Player's strength allows them to reduce the damage!\n");
+        }
+
+        questData.playerHealth -= damage;
+        output.push(`Player takes ${damage} damage. Health is now: ${questData.playerHealth}\n`);
+    }
+
+    static playerChallengeEnemy(questData) {
+        output.push(`The player challenges ${questData.enemyName}!\n`);
+        let playerAttackPower = questData.playerStrength + (questData.itemPower > 0 ? Math.floor(questData.itemPower / 2) : 0);
+
+        if (playerAttackPower > questData.enemyPower) {
+            questData.enemyPower -= Math.floor(playerAttackPower / 2);
+            output.push(`The player defeats the enemy! Enemy power reduced to ${questData.enemyPower}\n`);
+        } else {
+            output.push("The enemy is too strong. The player retreats!\n");
+        }
     }
 }
 
 module.exports = {
-    HeroQuest
+    HeroQuest,
+    output
 };

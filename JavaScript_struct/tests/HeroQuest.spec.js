@@ -1,10 +1,11 @@
-const { HeroQuest } = require('../src/HeroQuest');
+const { HeroQuest, output } = require('../src/HeroQuest');
 
 describe('HeroQuest', () => {
 
     let questData;
 
     beforeEach(() => {
+        output.splice(0, output.length);
         questData = {
             playerName: "Conan",
             playerHealth: 100,
@@ -13,7 +14,9 @@ describe('HeroQuest', () => {
             playerCraftingSkill: 10,
             itemName: "Amulet of Strength",
             itemKind: "Strength",
-            itemPower: 10
+            itemPower: 10,
+            enemyName: "Goblin",
+            enemyPower: 5
         };
     });
 
@@ -77,6 +80,22 @@ describe('HeroQuest', () => {
     it("itemRepair", () => {
         HeroQuest.itemRepair(questData);
         expect(questData.itemPower).toBe(26);
+    });
+
+    it("enemyToString", () => {
+        const result = HeroQuest.enemyToString(questData.enemyName, questData.enemyPower);
+        const expected = "Enemy: Goblin\nPower: 5\n";
+        expect(result).toBe(expected);
+    });
+
+    it("enemyAttackPlayer", () => {
+        HeroQuest.enemyAttackPlayer(questData);
+        expect(questData.playerHealth).toBe(98);
+    });
+
+    it("playerChallengeEnemy", () => {
+        HeroQuest.playerChallengeEnemy(questData);
+        expect(questData.enemyPower).toBe(-7);
     });
 
 });
