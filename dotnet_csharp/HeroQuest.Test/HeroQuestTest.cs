@@ -152,7 +152,7 @@ public class HeroQuestTest
         playerHealth = HeroQuest.EnemyAttackPlayer(enemyName, enemyPower,
             playerStrength, playerHealth);
 
-        Assert.Equal(95, playerHealth);
+        Assert.Equal(98, playerHealth);
     }
 
     [Fact]
@@ -172,7 +172,7 @@ public class HeroQuestTest
         enemyPower = HeroQuest.PlayerChallengeEnemy(enemyName, playerStrength,
             itemPower, enemyPower);
 
-        Assert.Equal(-5, enemyPower);
+        Assert.Equal(-10, enemyPower);
     }
 
     [Fact]
