@@ -59,7 +59,6 @@ describe('HeroQuest', () => {
 
     it("itemReduceByUsage", () => {
         let result = HeroQuest.itemReduceByUsage(itemKind, itemPower);
-        itemKind = result.itemKind;
         itemPower = result.itemPower;
         expect(itemPower).toBe(5);
     });
@@ -108,13 +107,12 @@ describe('HeroQuest', () => {
     });
 
     it("enemyAttackPlayer", () => {
-        playerStrength = 15;
         playerHealth = HeroQuest.enemyAttackPlayer(enemyName, enemyPower,
             playerStrength, playerHealth);
         expect(playerHealth).toBe(98);
     });
 
-    it("playerChallenge", () => {
+    it("playerChallengeEnemy", () => {
         enemyPower = HeroQuest.playerChallengeEnemy(enemyName, playerStrength,
             itemPower, enemyPower);
         expect(enemyPower).toBe(-7);

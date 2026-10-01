@@ -6,7 +6,7 @@ describe('HeroQuestAcceptanceTest', () => {
     it("fullScenario", () => {
         output.splice(0, output.length);
         run();
-        expect(output.join('\n')).toMatchSnapshot();
+        expect(output.join("")).toMatchSnapshot();
     });
 
 });

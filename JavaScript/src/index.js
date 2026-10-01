@@ -12,7 +12,7 @@ function run() {
     let enemyName = "Goblin Warlord";
     let enemyPower = 12;
 
-    output.push("=== QUEST BEGINNING ===\n");
+    output.push("=== QUEST BEGINNING ===\n\n");
 
     let result = HeroQuest.playerToString(playerName, playerHealth, playerStrength, playerMagic, playerCraftingSkill);
     output.push(result + "\n");
