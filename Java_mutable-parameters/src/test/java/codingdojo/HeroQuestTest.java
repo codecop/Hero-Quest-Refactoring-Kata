@@ -87,7 +87,7 @@ public class HeroQuestTest {
     @Test
     void itemApplyEffectToPlayerJunk() {
         itemKind[0] = "Junk";
-        HeroQuest.itemApplyEffectToPlayer(itemName,itemKind, itemPower[0], playerHealth, playerStrength, playerMagic);
+        HeroQuest.itemApplyEffectToPlayer(itemName, itemKind, itemPower[0], playerHealth, playerStrength, playerMagic);
         assertEquals(20, playerStrength[0]);
     }
 

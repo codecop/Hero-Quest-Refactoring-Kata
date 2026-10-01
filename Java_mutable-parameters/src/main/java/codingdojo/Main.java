@@ -15,6 +15,7 @@ public class Main {
         int[] enemyPower = new int[]{12};
 
         HeroQuest.output.append("=== QUEST BEGINNING ===\n\n");
+
         String result = HeroQuest.playerToString(playerName, playerHealth[0], playerStrength[0],
                 playerMagic[0], playerCraftingSkill);
         HeroQuest.output.append(result).append("\n");
@@ -31,6 +32,7 @@ public class Main {
         HeroQuest.output.append(result).append("\n");
 
         HeroQuest.output.append("--- Using the healing item ---\n\n");
+
         HeroQuest.itemApplyEffectToPlayer(
                 itemName, itemKind, itemPower[0], playerHealth,
                 playerStrength, playerMagic);
@@ -43,6 +45,7 @@ public class Main {
         HeroQuest.output.append(result).append("\n");
 
         HeroQuest.output.append("--- Item degradation from repeated use ---\n\n");
+
         HeroQuest.itemReduceByUsage(itemKind, itemPower);
         result = HeroQuest.itemToString(itemName, itemKind[0], itemPower[0]);
         HeroQuest.output.append(result).append("\n");
@@ -52,11 +55,13 @@ public class Main {
         HeroQuest.output.append(result).append("\n");
 
         HeroQuest.output.append("--- Repairing the damaged item ---\n\n");
+
         HeroQuest.itemRepair(itemPower, playerCraftingSkill);
         result = HeroQuest.itemToString(itemName, itemKind[0], itemPower[0]);
         HeroQuest.output.append(result).append("\n");
 
         HeroQuest.output.append("=== ENEMY ENCOUNTER ===\n\n");
+
         result = HeroQuest.enemyToString(enemyName, enemyPower[0]);
         HeroQuest.output.append(result).append("\n");
 
@@ -68,6 +73,7 @@ public class Main {
         HeroQuest.output.append(result).append("\n");
 
         HeroQuest.output.append("--- Player retaliates ---\n\n");
+
         HeroQuest.playerChallengeEnemy(enemyName, playerStrength,
                 itemPower, enemyPower);
 
@@ -76,6 +82,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        HeroQuest.output = new StringBuilder();
         run();
         System.out.println(HeroQuest.output);
     }
