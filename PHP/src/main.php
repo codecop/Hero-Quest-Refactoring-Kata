@@ -16,63 +16,63 @@ function run() {
     $enemyName = "Goblin Warlord";
     $enemyPower = 12;
 
-    HeroQuest::$output[] = "=== QUEST BEGINNING ===\n";
+    HeroQuest::$output[] = "=== QUEST BEGINNING ===\n\n";
 
     HeroQuest::$output[] = HeroQuest::playerToString($playerName, $playerHealth, $playerStrength, $playerMagic, $playerCraftingSkill);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
     HeroQuest::$output[] = HeroQuest::itemToString($itemName, $itemKind, $itemPower);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
-    HeroQuest::$output[] = "--- Exploring the dungeon... ---\n";
+    HeroQuest::$output[] = "--- Exploring the dungeon... ---\n\n";
 
     HeroQuest::playerFallsDown($playerHealth, $playerStrength);
     HeroQuest::$output[] = HeroQuest::playerToString($playerName, $playerHealth, $playerStrength, $playerMagic, $playerCraftingSkill);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
-    HeroQuest::$output[] = "--- Using the healing item ---\n";
+    HeroQuest::$output[] = "--- Using the healing item ---\n\n";
 
     HeroQuest::itemApplyEffectToPlayer($itemName, $itemKind, $itemPower, $playerHealth, $playerStrength, $playerMagic);
     HeroQuest::$output[] = HeroQuest::playerToString($playerName, $playerHealth, $playerStrength, $playerMagic, $playerCraftingSkill);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
     HeroQuest::$output[] = HeroQuest::itemToString($itemName, $itemKind, $itemPower);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
-    HeroQuest::$output[] = "--- Item degradation from repeated use ---\n";
+    HeroQuest::$output[] = "--- Item degradation from repeated use ---\n\n";
 
     HeroQuest::itemReduceByUsage($itemKind, $itemPower);
     HeroQuest::$output[] = HeroQuest::itemToString($itemName, $itemKind, $itemPower);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
     HeroQuest::itemReduceByUsage($itemKind, $itemPower);
     HeroQuest::$output[] = HeroQuest::itemToString($itemName, $itemKind, $itemPower);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
-    HeroQuest::$output[] = "--- Repairing the damaged item ---\n";
+    HeroQuest::$output[] = "--- Repairing the damaged item ---\n\n";
 
     HeroQuest::itemRepair($playerCraftingSkill, $itemPower);
     HeroQuest::$output[] = HeroQuest::itemToString($itemName, $itemKind, $itemPower);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
-    HeroQuest::$output[] = "=== ENEMY ENCOUNTER ===\n";
+    HeroQuest::$output[] = "=== ENEMY ENCOUNTER ===\n\n";
 
     HeroQuest::$output[] = HeroQuest::enemyToString($enemyName, $enemyPower);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
     HeroQuest::enemyAttackPlayer($enemyName, $enemyPower, $playerStrength, $playerHealth);
     HeroQuest::$output[] = HeroQuest::playerToString($playerName, $playerHealth, $playerStrength, $playerMagic, $playerCraftingSkill);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 
-    HeroQuest::$output[] = "--- Player retaliates ---\n";
+    HeroQuest::$output[] = "--- Player retaliates ---\n\n";
 
     HeroQuest::playerChallengeEnemy($enemyName, $playerStrength, $itemPower, $enemyPower);
     HeroQuest::$output[] = HeroQuest::enemyToString($enemyName, $enemyPower);
-    HeroQuest::$output[] = "";
+    HeroQuest::$output[] = "\n";
 }
 
 if (php_sapi_name() === 'cli' && basename(__FILE__) === basename($argv[0] ?? '')) {
     HeroQuest::$output = [];
     run();
-    echo implode("\n", HeroQuest::$output) . "\n";
+    echo implode("", HeroQuest::$output);
 }
