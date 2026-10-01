@@ -20,6 +20,8 @@ public class HeroQuestTest {
         questData.setItemName("Amulet of Strength");
         questData.setItemKind("Strength");
         questData.setItemPower(10);
+        questData.setEnemyName("Goblin");
+        questData.setEnemyPower(5);
     }
 
     @Test
@@ -85,5 +87,24 @@ public class HeroQuestTest {
     void itemRepair() {
         HeroQuest.itemRepair(questData);
         assertEquals(26, questData.getItemPower());
+    }
+
+    @Test
+    void enemyToString() {
+        var result = HeroQuest.enemyToString(questData.getEnemyName(), questData.getEnemyPower());
+        var expected = "Enemy: Goblin\nPower: 5\n";
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void enemyAttackPlayer() {
+        HeroQuest.enemyAttackPlayer(questData);
+        assertEquals(98, questData.getPlayerHealth());
+    }
+
+    @Test
+    void playerChallengeEnemy() {
+        HeroQuest.playerChallengeEnemy(questData);
+        assertEquals(-7, questData.getEnemyPower());
     }
 }

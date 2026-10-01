@@ -9,6 +9,8 @@ public class QuestData {
     private String itemName;
     private String itemKind;
     private int itemPower;
+    private String enemyName;
+    private int enemyPower;
 
     public String getPlayerName() {
         return playerName;
@@ -72,5 +74,21 @@ public class QuestData {
 
     public void setItemPower(int itemPower) {
         this.itemPower = itemPower;
+    }
+
+    public String getEnemyName() {
+        return enemyName;
+    }
+
+    public void setEnemyName(String enemyName) {
+        this.enemyName = enemyName;
+    }
+
+    public int getEnemyPower() {
+        return enemyPower;
+    }
+
+    public void setEnemyPower(int enemyPower) {
+        this.enemyPower = enemyPower;
     }
 }

@@ -1,44 +1,82 @@
 package codingdojo;
 
-import static codingdojo.HeroQuest.itemApplyEffectToPlayer;
-import static codingdojo.HeroQuest.itemReduceByUsage;
-import static codingdojo.HeroQuest.itemRepair;
-import static codingdojo.HeroQuest.itemToString;
-import static codingdojo.HeroQuest.playerToString;
-
 public class Main {
 
-    public static void main(String[] args) {
+    public static void run() {
         QuestData questData = new QuestData();
         questData.setPlayerName("Conan");
         questData.setPlayerHealth(100);
-        questData.setPlayerStrength(20);
-        questData.setPlayerMagic(10);
-        questData.setPlayerCraftingSkill(10);
-        questData.setItemName("Amulet of Strength");
-        questData.setItemKind("Strength");
-        questData.setItemPower(10);
+        questData.setPlayerStrength(7);
+        questData.setPlayerMagic(15);
+        questData.setPlayerCraftingSkill(12);
+        questData.setItemName("Healing Potion");
+        questData.setItemKind("Health");
+        questData.setItemPower(20);
+        questData.setEnemyName("Goblin Warlord");
+        questData.setEnemyPower(12);
 
-        String result = playerToString(questData.getPlayerName(),
-                questData.getPlayerHealth(), questData.getPlayerStrength(), questData.getPlayerMagic(), questData.getPlayerCraftingSkill());
-        System.out.printf("Player at begin\n%s\n", result);
+        HeroQuest.output.append("=== QUEST BEGINNING ===\n\n");
 
-        result = itemToString(questData.getItemName(), questData.getItemKind(), questData.getItemPower());
-        System.out.printf("Player found an item\n%s\n", result);
+        String result = HeroQuest.playerToString(questData.getPlayerName(), questData.getPlayerHealth(),
+                questData.getPlayerStrength(), questData.getPlayerMagic(), questData.getPlayerCraftingSkill());
+        HeroQuest.output.append(result).append("\n");
 
-        itemApplyEffectToPlayer(questData);
-        itemReduceByUsage(questData);
+        result = HeroQuest.itemToString(questData.getItemName(), questData.getItemKind(), questData.getItemPower());
+        HeroQuest.output.append(result).append("\n");
 
-        result = HeroQuest.playerToString(questData.getPlayerName(),
-                questData.getPlayerHealth(), questData.getPlayerStrength(), questData.getPlayerMagic(), questData.getPlayerCraftingSkill());
-        System.out.printf("Player now\n%s\n", result);
+        HeroQuest.output.append("--- Exploring the dungeon... ---\n\n");
 
-        result = itemToString(questData.getItemName(), questData.getItemKind(), questData.getItemPower());
-        System.out.printf("Item now\n%s\n", result);
+        HeroQuest.playerFallsDown(questData);
+        result = HeroQuest.playerToString(questData.getPlayerName(), questData.getPlayerHealth(),
+                questData.getPlayerStrength(), questData.getPlayerMagic(), questData.getPlayerCraftingSkill());
+        HeroQuest.output.append(result).append("\n");
 
-        System.out.printf("Player tries to repair item...\n");
-        itemRepair(questData);
-        result = itemToString(questData.getItemName(), questData.getItemKind(), questData.getItemPower());
-        System.out.printf("Item now\n%s\n", result);
+        HeroQuest.output.append("--- Using the healing item ---\n\n");
+
+        HeroQuest.itemApplyEffectToPlayer(questData);
+        result = HeroQuest.playerToString(questData.getPlayerName(), questData.getPlayerHealth(),
+                questData.getPlayerStrength(), questData.getPlayerMagic(), questData.getPlayerCraftingSkill());
+        HeroQuest.output.append(result).append("\n");
+
+        result = HeroQuest.itemToString(questData.getItemName(), questData.getItemKind(), questData.getItemPower());
+        HeroQuest.output.append(result).append("\n");
+
+        HeroQuest.output.append("--- Item degradation from repeated use ---\n\n");
+
+        HeroQuest.itemReduceByUsage(questData);
+        result = HeroQuest.itemToString(questData.getItemName(), questData.getItemKind(), questData.getItemPower());
+        HeroQuest.output.append(result).append("\n");
+
+        HeroQuest.itemReduceByUsage(questData);
+        result = HeroQuest.itemToString(questData.getItemName(), questData.getItemKind(), questData.getItemPower());
+        HeroQuest.output.append(result).append("\n");
+
+        HeroQuest.output.append("--- Repairing the damaged item ---\n\n");
+
+        HeroQuest.itemRepair(questData);
+        result = HeroQuest.itemToString(questData.getItemName(), questData.getItemKind(), questData.getItemPower());
+        HeroQuest.output.append(result).append("\n");
+
+        HeroQuest.output.append("=== ENEMY ENCOUNTER ===\n\n");
+
+        result = HeroQuest.enemyToString(questData.getEnemyName(), questData.getEnemyPower());
+        HeroQuest.output.append(result).append("\n");
+
+        HeroQuest.enemyAttackPlayer(questData);
+        result = HeroQuest.playerToString(questData.getPlayerName(), questData.getPlayerHealth(),
+                questData.getPlayerStrength(), questData.getPlayerMagic(), questData.getPlayerCraftingSkill());
+        HeroQuest.output.append(result).append("\n");
+
+        HeroQuest.output.append("--- Player retaliates ---\n\n");
+
+        HeroQuest.playerChallengeEnemy(questData);
+        result = HeroQuest.enemyToString(questData.getEnemyName(), questData.getEnemyPower());
+        HeroQuest.output.append(result).append("\n");
+    }
+
+    public static void main(String[] args) {
+        HeroQuest.output = new StringBuilder();
+        run();
+        System.out.println(HeroQuest.output);
     }
 }
