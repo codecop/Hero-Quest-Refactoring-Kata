@@ -20,6 +20,7 @@ public class HeroQuestTest {
 
     @BeforeEach
     void SetUp() {
+        HeroQuest.output.setLength(0);
         playerName = "Conan";
         playerHealth = new int[] { 100 };
         playerStrength = new int[] { 20 };

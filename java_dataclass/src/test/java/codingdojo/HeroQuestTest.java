@@ -11,6 +11,7 @@ public class HeroQuestTest {
 
     @BeforeEach
     void SetUp() {
+        HeroQuest.output.setLength(0);
         questData = new QuestData();
         questData.setPlayerName("Conan");
         questData.setPlayerHealth(100);
