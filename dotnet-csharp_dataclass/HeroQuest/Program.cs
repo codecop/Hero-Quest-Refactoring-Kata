@@ -25,59 +25,59 @@ public static class Program
 
         string result = HeroQuest.PlayerToString(questData.PlayerName, questData.PlayerHealth, questData.PlayerStrength,
                 questData.PlayerMagic, questData.PlayerCraftingSkill);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         result = HeroQuest.ItemToString(questData.ItemName, questData.ItemKind, questData.ItemPower);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         HeroQuest.Output.AppendLine("--- Exploring the dungeon... ---\n");
 
         HeroQuest.PlayerFallsDown(questData);
         result = HeroQuest.PlayerToString(questData.PlayerName, questData.PlayerHealth, questData.PlayerStrength,
                 questData.PlayerMagic, questData.PlayerCraftingSkill);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         HeroQuest.Output.AppendLine("--- Using the healing item ---\n");
 
         HeroQuest.ItemApplyEffectToPlayer(questData);
         result = HeroQuest.PlayerToString(questData.PlayerName, questData.PlayerHealth, questData.PlayerStrength,
                 questData.PlayerMagic, questData.PlayerCraftingSkill);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         result = HeroQuest.ItemToString(questData.ItemName, questData.ItemKind, questData.ItemPower);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         HeroQuest.Output.AppendLine("--- Item degradation from repeated use ---\n");
 
         HeroQuest.ItemReduceByUsage(questData);
         result = HeroQuest.ItemToString(questData.ItemName, questData.ItemKind, questData.ItemPower);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         HeroQuest.ItemReduceByUsage(questData);
         result = HeroQuest.ItemToString(questData.ItemName, questData.ItemKind, questData.ItemPower);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         HeroQuest.Output.AppendLine("--- Repairing the damaged item ---\n");
 
         HeroQuest.ItemRepair(questData);
         result = HeroQuest.ItemToString(questData.ItemName, questData.ItemKind, questData.ItemPower);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         HeroQuest.Output.AppendLine("=== ENEMY ENCOUNTER ===\n");
 
         result = HeroQuest.EnemyToString(questData.EnemyName, questData.EnemyPower);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         HeroQuest.EnemyAttackPlayer(questData);
         result = HeroQuest.PlayerToString(questData.PlayerName, questData.PlayerHealth, questData.PlayerStrength,
                 questData.PlayerMagic, questData.PlayerCraftingSkill);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
 
         HeroQuest.Output.AppendLine("--- Player retaliates ---\n");
 
         HeroQuest.PlayerChallengeEnemy(questData);
         result = HeroQuest.EnemyToString(questData.EnemyName, questData.EnemyPower);
-        HeroQuest.Output.Append(result);
+        HeroQuest.Output.AppendLine(result);
     }
 
     public static void Main()
