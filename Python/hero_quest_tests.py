@@ -99,7 +99,6 @@ class HeroQuestTestCase(unittest.TestCase):
         assert 20 == self.player_strength
 
     def test_item_repair(self):
-        self.item_kind = "Junk"
         self.item_power = HeroQuest.item_repair(
             self.player_crafting_skill, self.item_power
         )
