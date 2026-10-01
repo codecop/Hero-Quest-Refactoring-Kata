@@ -31,3 +31,9 @@ jobs:
       - name: Build and test
         working-directory: dotnet-csharp_dataclass
         run: dotnet test
+
+      - name: Run
+        working-directory: dotnet-csharp_dataclass
+        run: |
+          cd HeroQuest
+          dotnet run
