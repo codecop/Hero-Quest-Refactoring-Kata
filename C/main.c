@@ -6,15 +6,15 @@
 void run()
 {
     char result[256];
-    char* playerName = "Conan";
+    const char playerName[] = "Conan";
     int playerHealth = 100;
     int playerStrength = 7;
     int playerMagic = 15;
     int playerCraftingSkill = 12;
-    char itemName[] = "Healing Potion";
+    const char itemName[] = "Healing Potion";
     char itemKind[] = "Health";
     int itemPower = 20;
-    char enemyName[] = "Goblin Warlord";
+    const char enemyName[] = "Goblin Warlord";
     int enemyPower = 12;
 
     resetOutput();
