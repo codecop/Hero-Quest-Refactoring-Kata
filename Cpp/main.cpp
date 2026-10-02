@@ -90,9 +90,11 @@ void run()
     appendOutput("\n");
 }
 
+#ifndef UNIT_TEST
 int main(void)
 {
     run();
     printf("%s", outputBuffer);
     return 0;
 }
+#endif
