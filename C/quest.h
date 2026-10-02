@@ -1,5 +1,4 @@
 
-// Output buffer
 extern char outputBuffer[8192];
 extern size_t outputLength;
 

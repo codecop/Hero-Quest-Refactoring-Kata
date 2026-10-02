@@ -81,7 +81,7 @@ func TestItemRepair(t *testing.T) {
 
 	hero_quest.ItemRepair(&questData)
 
-	assert.Equal(t, 40, questData.ItemPower) // 20 + (-5 + ((12 * 2) + 1)) = 20 + 20 = 40
+	assert.Equal(t, 40, questData.ItemPower)
 }
 
 func TestEnemyToString(t *testing.T) {
@@ -94,7 +94,7 @@ func TestEnemyToString(t *testing.T) {
 
 func TestEnemyAttackPlayer(t *testing.T) {
 	questData := createQuestData()
-	questData.PlayerStrength = 20 // Make strength > enemy power to halve damage
+	questData.PlayerStrength = 20
 	hero_quest.EnemyAttackPlayer(&questData)
 
 	assert.Equal(t, 98, questData.PlayerHealth)
