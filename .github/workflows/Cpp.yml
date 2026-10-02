@@ -29,7 +29,8 @@ jobs:
       working-directory: Cpp
       run: |
         cd build
-        ./quest_test -r console -s
+        ./quest_unit_test -r console -s
+        ./quest_acceptance_test -r console -s
 
     - name: Run
       working-directory: Cpp
