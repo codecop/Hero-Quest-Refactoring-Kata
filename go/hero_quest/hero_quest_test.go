@@ -55,7 +55,9 @@ func TestItemReduceByUsage(t *testing.T) {
 	itemPower := 20
 	hero_quest.ItemReduceByUsage(&itemKind, &itemPower)
 
-	assert.Equal(t, 10, itemPower)
+	assert := assert.New(t)
+	assert.Equal(10, itemPower)
+	assert.Equal("Health", itemKind)
 }
 
 func TestItemReduceByUsageToJunk(t *testing.T) {
@@ -83,6 +85,7 @@ func TestItemApplyEffectToPlayerJunk(t *testing.T) {
 	playerMagic := 15
 	hero_quest.ItemApplyEffectToPlayer(testItemName, "Junk", testItemPower, &playerHealth, &playerStrength, &playerMagic)
 
+	assert.Equal(t, 100, playerHealth)
 	assert.Equal(t, 7, playerStrength)
 }
 

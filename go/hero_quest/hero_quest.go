@@ -4,14 +4,6 @@ import "fmt"
 
 var Output []string
 
-var (
-	PlayerName          = "Conan"
-	PlayerHealth        = 100
-	PlayerStrength      = 20
-	PlayerMagic         = 10
-	PlayerCraftingSkill = 10
-)
-
 func PlayerToString(playerName string, playerHealth int, playerStrength int, playerMagic int, playerCraftingSkill int) string {
 	return fmt.Sprintf(
 		"%s's Attributes:\nHealth: %v\nStrength: %v\nMagic: %v\nCrafting Skill: %v\n",
@@ -31,12 +23,6 @@ func PlayerFallsDown(playerHealth *int, playerStrength *int) {
 		Output = append(Output, "Player's strength is too small. Health decreases by 10.\n")
 	}
 }
-
-var (
-	AmuletItemName  = "Amulet of Strength"
-	AmuletItemKind  = "Strength"
-	AmuletItemPower = 10
-)
 
 func ItemToString(itemName string, itemKind string, itemPower int) string {
 	return fmt.Sprintf("Item: %s\nKind: %s\nPower: %v\n", itemName, itemKind, itemPower)
@@ -72,11 +58,6 @@ func ItemRepair(itemPower *int, playerCraftingSkill int) {
 
 	Output = append(Output, fmt.Sprintf("Repaired the item by %v points. Item's Durability: %v\n", repairAmount, *itemPower))
 }
-
-var (
-	EnemyName        = "Goblin Warlord"
-	EnemyPower       = 12
-)
 
 func EnemyToString(enemyName string, enemyPower int) string {
 	return fmt.Sprintf("Enemy: %s\nPower: %d\n", enemyName, enemyPower)
